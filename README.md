@@ -1,7 +1,12 @@
 # Cloudflare Worker Template
 
-A Cloudflare Worker that provides AI bot detection and proxy functionality. This worker detects various AI bots (ChatGPT, GPTBot, Google Extended, Bing Preview, Perplexity) and handles requests accordingly.
+This Cloudflare Worker acts as a reverse proxy and bot traffic handler for your web server. It detects whether the incoming request comes from a known AI bot or scraper (ChatGPT, GPTBot, Claude, Perplexity, Google-Extended, BingPreview) and, based on that, decides:
 
+Human visitors: Serve content normally from your primary origin server.
+
+AI bot visitors: Serve content from an alternate origin (Amazon S3 bucket), likely to control what AI crawlers or automated tools can access.
+
+Additionally, it logs bot traffic events to an external analytics API for tracking.
 ## Features
 
 - **AI Bot Detection**: Detects ChatGPT, GPTBot, Google Extended, Bing Preview, and Perplexity bots
